@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { lustria } from './fonts/lustria';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';

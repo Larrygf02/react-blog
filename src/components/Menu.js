@@ -12,9 +12,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
-
+import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -27,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('sm')]: {
       display: 'block',
     },
+    color: 'black'
   },
   search: {
     position: 'relative',
@@ -77,6 +77,12 @@ const useStyles = makeStyles((theme) => ({
       display: 'none',
     },
   },
+  colorAppBar: {
+    backgroundColor: fade(theme.palette.common.white, 0.14)
+  },
+  colorIcon: {
+    color: fade(theme.palette.common.black, 0.54)
+  }
 }));
 
 export default function PrimarySearchAppBar() {
@@ -132,7 +138,7 @@ export default function PrimarySearchAppBar() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
+        <IconButton aria-label="show 4 new mails">
           <Badge badgeContent={4} color="secondary">
             <MailIcon />
           </Badge>
@@ -140,9 +146,9 @@ export default function PrimarySearchAppBar() {
         <p>Messages</p>
       </MenuItem>
       <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
+        <IconButton aria-label="show 11 new notifications">
           <Badge badgeContent={11} color="secondary">
-            <NotificationsIcon />
+            <NotificationsNoneIcon />
           </Badge>
         </IconButton>
         <p>Notifications</p>
@@ -152,7 +158,6 @@ export default function PrimarySearchAppBar() {
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
-          color="inherit"
         >
           <AccountCircle />
         </IconButton>
@@ -163,21 +168,20 @@ export default function PrimarySearchAppBar() {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static">
+      <AppBar position="static" className={classes.colorAppBar}>
         <Toolbar>
           <IconButton
             edge="start"
             className={classes.menuButton}
-            color="inherit"
             aria-label="open drawer"
           >
             <MenuIcon />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
-            Material-UI
+            Blog
           </Typography>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
+          <div>
+            <div>
               <SearchIcon />
             </div>
             <InputBase
@@ -191,14 +195,9 @@ export default function PrimarySearchAppBar() {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton aria-label="show 17 new notifications" color="inherit">
+            <IconButton aria-label="show 17 new notifications">
               <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon />
+                <NotificationsNoneIcon/>
               </Badge>
             </IconButton>
             <IconButton
@@ -207,7 +206,6 @@ export default function PrimarySearchAppBar() {
               aria-controls={menuId}
               aria-haspopup="true"
               onClick={handleProfileMenuOpen}
-              color="inherit"
             >
               <AccountCircle />
             </IconButton>
@@ -218,7 +216,6 @@ export default function PrimarySearchAppBar() {
               aria-controls={mobileMenuId}
               aria-haspopup="true"
               onClick={handleMobileMenuOpen}
-              color="inherit"
             >
               <MoreIcon />
             </IconButton>
