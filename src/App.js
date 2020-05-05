@@ -4,6 +4,7 @@ import './App.css';
 import { lustria } from './fonts/lustria';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { CssBaseline } from '@material-ui/core';
+import PrimarySearchAppBar from './components/Menu';
 
 const theme = createMuiTheme({
   typography: {
@@ -17,12 +18,13 @@ const theme = createMuiTheme({
     },
   },
 });
+
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <div className="App">
-        
+        <PrimarySearchAppBar></PrimarySearchAppBar>
         {/* <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
