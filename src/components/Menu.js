@@ -51,6 +51,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    color: fade(theme.palette.common.black, 0.54),
   },
   inputRoot: {
     color: 'inherit',
@@ -64,6 +65,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('md')]: {
       width: '20ch',
     },
+    borderRadius: 16
   },
   sectionDesktop: {
     display: 'none',
@@ -180,14 +182,13 @@ export default function PrimarySearchAppBar() {
           <Typography className={classes.title} variant="h6" noWrap>
             Blog
           </Typography>
-          <div>
-            <div>
+          <div className={classes.search}>
+            <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
             <InputBase
               placeholder="Search…"
               classes={{
-                root: classes.inputRoot,
                 input: classes.inputInput,
               }}
               inputProps={{ 'aria-label': 'search' }}
