@@ -4,8 +4,9 @@ import { lustria } from './fonts/lustria';
 import { unstable_createMuiStrictModeTheme as createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { CssBaseline } from '@material-ui/core';
 import MenuBar from './components/Menu';
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import MyStories from './components/stories/MyStories';
 //import MenuBar from './components/MenuMaterial';
-
 const theme = createMuiTheme({
   typography: {
     fontFamily: 'Lustria',
@@ -21,12 +22,17 @@ const theme = createMuiTheme({
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <div className="App">
-        <MenuBar></MenuBar>
-      </div>
-    </ThemeProvider>
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <div className="App">
+          <MenuBar></MenuBar>
+          <Switch>
+            <Route exact path="/stories" component={MyStories}></Route>
+          </Switch>
+        </div>
+      </ThemeProvider>
+    </BrowserRouter>
   );
 }
 

@@ -14,6 +14,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
+
 const useStyles = makeStyles((theme) => ({
   appBar: {
     boxShadow: 0
