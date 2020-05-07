@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import { Typography, Box } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 
 const useStyles = makeStyles({
   root: {
@@ -23,44 +23,43 @@ function TabPanel(props) {
         {...other}
       >
         {value === index && (
-          <Box p={3}>
-            <Typography>{children}</Typography>
+          <Box p={1}>
+            {children}
           </Box>
         )}
       </div>
     );
   }
-function TabsItems() {
-  const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+function TabsItems(props) {
+    const { items } = props;
+    const classes = useStyles();
+    const [value, setValue] = React.useState(0);
 
-  const handleChange = (event, newValue) => {
+    const handleChange = (event, newValue) => {
     setValue(newValue);
-  };
+    };
 
-  return (
-    <Paper className={classes.root}>
-      <Tabs
-        value={value}
-        onChange={handleChange}
-        indicatorColor="primary"
-        textColor="primary"
-      >
-        <Tab label="Item One" />
-        <Tab label="Item Two" />
-        <Tab label="Item Three" />
-      </Tabs>
-    <TabPanel value={value} index={0}>
-        Item One
-    </TabPanel>
-    <TabPanel value={value} index={1}>
-        Item Two
-    </TabPanel>
-    <TabPanel value={value} index={2}>
-        Item Three
-    </TabPanel>
-    </Paper>
-  );
+    return (
+        <div>
+            <Paper className={classes.root}>
+            <Tabs
+                value={value}
+                onChange={handleChange}
+                indicatorColor="primary"
+                textColor="primary"
+            >
+                {items.map(item => (
+                    <Tab label={item.label} key={item.label}/>
+                ))}
+            </Tabs>
+            </Paper>
+            {items.map((item, index) => (
+                <TabPanel value={value} index={index} key={index}>
+                    {item.content}
+                </TabPanel>
+            ))}
+        </div>
+    );
 }
 
 export default TabsItems
