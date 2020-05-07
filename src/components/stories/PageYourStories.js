@@ -12,7 +12,7 @@ const MyStories = () => {
     return (
         <Fragment>
             <Box pl={8} pr={8} pt={4}>
-                <h1>Mis Historias</h1>
+                <h1>Tus Historias</h1>
                 <TabsItems items={items}></TabsItems>
             </Box>
         </Fragment>

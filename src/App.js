@@ -5,7 +5,7 @@ import { unstable_createMuiStrictModeTheme as createMuiTheme, ThemeProvider } fr
 import { CssBaseline } from '@material-ui/core';
 import MenuBar from './components/Menu';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import MyStories from './components/stories/MyStories';
+import MyStories from './components/stories/PageYourStories';
 //import MenuBar from './components/MenuMaterial';
 const theme = createMuiTheme({
   typography: {
