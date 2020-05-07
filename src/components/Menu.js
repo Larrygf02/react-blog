@@ -14,6 +14,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -132,7 +133,7 @@ export default function MenuBar() {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>Nueva Historia</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Historias</MenuItem>
+      <MenuItem component={Link} to="/stories" onClick={handleMenuClose}>Historias</MenuItem>
       <MenuItem onClick={handleMenuClose}>Lista de lectura</MenuItem>
       <MenuItem onClick={handleMenuClose}>Perfil</MenuItem>
       <MenuItem onClick={handleMenuClose}>Configuracion</MenuItem>

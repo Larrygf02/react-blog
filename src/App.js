@@ -25,7 +25,7 @@ function App() {
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <div className="App">
+        <div>
           <MenuBar></MenuBar>
           <Switch>
             <Route exact path="/stories" component={MyStories}></Route>
