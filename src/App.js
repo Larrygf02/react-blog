@@ -6,7 +6,11 @@ import { CssBaseline } from '@material-ui/core';
 import MenuBar from './components/Menu';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import MyStories from './components/stories/PageYourStories';
+import { Provider } from 'react-redux';
+import store from './store';
+
 //import MenuBar from './components/MenuMaterial';
+
 const theme = createMuiTheme({
   typography: {
     fontFamily: 'Lustria',
@@ -23,15 +27,17 @@ const theme = createMuiTheme({
 function App() {
   return (
     <BrowserRouter>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <div>
-          <MenuBar></MenuBar>
-          <Switch>
-            <Route exact path="/stories" component={MyStories}></Route>
-          </Switch>
-        </div>
-      </ThemeProvider>
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <div>
+            <MenuBar></MenuBar>
+            <Switch>
+              <Route exact path="/stories" component={MyStories}></Route>
+            </Switch>
+          </div>
+        </ThemeProvider>
+      </Provider>
     </BrowserRouter>
   );
 }
