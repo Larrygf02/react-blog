@@ -6,7 +6,7 @@ export const startGetStories = payload => ({
     ...payload
 });
 
-const successGetStories = payload => ({
+export const successGetStories = payload => ({
     type: 'SUCCESS_GET_STORIES',
     ...payload
 })
