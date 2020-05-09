@@ -1,18 +1,28 @@
-import React, { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useState, useEffect, Fragment } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { startGetStories } from '../../actions/storieAction';
 
 function Stories() {
     // Inicializar el dispatch
     const dispatch = useDispatch();
-    const [ stories, setStories] = useState([]);
+    // const [ stories, setStories] = useState([]);
     useEffect(() => {
-        if (stories.length === 0) {
-            dispatch(startGetStories());
-        }
-    }, [stories.length, dispatch])
+        dispatch(startGetStories());
+    }, [dispatch])
+    // acceder al state
+    const loading = useSelector(state => state.stories.loading)
+    const stories = useSelector(state => state.stories.stories)
     return (
-        <h2>Mis historias</h2>
+        <Fragment>
+            {loading ? <p>Cargando</p>: null}
+            {stories.map(storie => (
+                <div key={storie.ID}>
+                    <h3>{storie.Title}</h3>
+                    <p>{storie.Content}</p>
+                    <span>{storie.CreatedAt}</span>
+                </div>
+            ))}
+        </Fragment>
     )
 }
 
