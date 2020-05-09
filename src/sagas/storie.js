@@ -9,7 +9,7 @@ function* getStories({ payload }) {
             .then(response => response.data)
             .catch(error => console.log(error))
         console.log(stories)
-        yield put({ type: SUCCESS_GET_STORIES, stories});
+        yield put({ type: SUCCESS_GET_STORIES, payload: stories});
         //const stories = yield call('http://localhost:5000/storie/user/3')
     } catch (error) {
         console.log(error)
