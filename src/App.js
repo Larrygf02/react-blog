@@ -6,12 +6,11 @@ import { CssBaseline } from '@material-ui/core';
 import MenuBar from './components/Menu';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import MyStories from './components/stories/PageYourStories';
-import { Provider } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
 import store from './store';
 import SignIn from './components/login/SignIn';
 
 //import MenuBar from './components/MenuMaterial';
-
 const theme = createMuiTheme({
   typography: {
     fontFamily: 'Lustria',
@@ -24,22 +23,27 @@ const theme = createMuiTheme({
     },
   },
 });
-let isAuthenticated = false
+function MainApp() {
+  const isAuthenticated = useSelector(state => state.auth.isAuthenticated)
+  return (
+    <div>
+      {isAuthenticated ? <MenuBar/> : null}
+      <Switch>
+        <Route exact path="/login" component={SignIn}></Route>
+        <Route exact path="/stories" render={() => (
+          isAuthenticated === true ? <MyStories/> : <Redirect to="/login"/>
+        )}></Route>
+      </Switch>
+    </div>
+  )
+}
 function App() {
   return (
     <BrowserRouter>
       <Provider store={store}>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <div>
-            {isAuthenticated ? <MenuBar/> : null}
-            <Switch>
-              <Route exact path="/login" component={SignIn}></Route>
-              <Route exact path="/stories" render={() => (
-                isAuthenticated === true ? <MyStories/> : <Redirect to="/login"/>
-              )}></Route>
-            </Switch>
-          </div>
+          <MainApp></MainApp>
         </ThemeProvider>
       </Provider>
     </BrowserRouter>
