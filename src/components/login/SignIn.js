@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -52,10 +52,13 @@ const useStyles = makeStyles((theme) => ({
 function SignIn() {
     const classes = useStyles();
     const dispatch = useDispatch();
+    //state
+    const [ email, saveEmail ] = useState('')
+    const [ password, savePassword ] = useState('');
     const login = (e) => {
         e.preventDefault();
         console.log('Loging ...');
-        dispatch(startLogin())
+        dispatch(startLogin({ email, password }))
     }
     return (
         <Container component="main" maxWidth="xs">
@@ -78,6 +81,8 @@ function SignIn() {
               name="email"
               autoComplete="email"
               autoFocus
+              value={email}
+              onChange={ e => saveEmail(e.target.value)}
             />
             <TextField
               variant="outlined"
@@ -89,6 +94,8 @@ function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              value={password}
+              onChange={ e => savePassword(e.target.value)}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}

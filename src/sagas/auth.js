@@ -3,6 +3,7 @@ import { takeLatest, put } from "redux-saga/effects";
 
 function* startLogin(obj) {
     console.log(obj);
+    console.log('Hola');
     try {
         yield put({ type: SUCCESS_LOGIN })
     } catch (error) {
