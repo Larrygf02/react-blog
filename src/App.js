@@ -32,7 +32,7 @@ function App() {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <div>
-            <MenuBar></MenuBar>
+            {isAuthenticated ? <MenuBar/> : null}
             <Switch>
               <Route exact path="/login" component={SignIn}></Route>
               <Route exact path="/stories" render={() => (
