@@ -12,6 +12,8 @@ import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+import { useDispatch } from 'react-redux';
+import { startLogin } from '../../actions/authAction';
 
 function Copyright() {
     return (
@@ -46,8 +48,15 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(3, 0, 2),
     },
 }));
+
 function SignIn() {
     const classes = useStyles();
+    const dispatch = useDispatch();
+    const login = (e) => {
+        e.preventDefault();
+        console.log('Loging ...');
+        dispatch(startLogin())
+    }
     return (
         <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -91,6 +100,7 @@ function SignIn() {
               variant="contained"
               color="primary"
               className={classes.submit}
+              onClick={(e) => login(e)}
             >
               Sign In
             </Button>
