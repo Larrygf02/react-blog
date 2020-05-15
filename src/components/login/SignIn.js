@@ -53,12 +53,12 @@ function SignIn() {
     const classes = useStyles();
     const dispatch = useDispatch();
     //state
-    const [ email, saveEmail ] = useState('')
+    const [ nickname, saveNickname ] = useState('')
     const [ password, savePassword ] = useState('');
     const login = (e) => {
         e.preventDefault();
         console.log('Loging ...');
-        dispatch(startLogin({ email, password }))
+        dispatch(startLogin({ nickname, password }))
     }
     return (
         <Container component="main" maxWidth="xs">
@@ -76,13 +76,12 @@ function SignIn() {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="nickname"
+              label="Username"
+              name="nickname"
               autoFocus
-              value={email}
-              onChange={ e => saveEmail(e.target.value)}
+              value={nickname}
+              onChange={ e => saveNickname(e.target.value)}
             />
             <TextField
               variant="outlined"

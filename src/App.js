@@ -31,7 +31,7 @@ function MainApp() {
       <Switch>
         <Route exact path="/login" component={SignIn}></Route>
         <Route exact path="/stories" render={() => (
-          isAuthenticated === true ? <MyStories/> : <Redirect to="/login"/>
+          isAuthenticated === false ? <MyStories/> : <Redirect to="/login"/>
         )}></Route>
       </Switch>
     </div>
