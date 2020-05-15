@@ -9,6 +9,7 @@ import MyStories from './components/stories/PageYourStories';
 import { Provider, useSelector } from 'react-redux';
 import store from './store';
 import SignIn from './components/login/SignIn';
+import SignUp from './components/login/SignUp';
 
 //import MenuBar from './components/MenuMaterial';
 const theme = createMuiTheme({
@@ -23,6 +24,7 @@ const theme = createMuiTheme({
     },
   },
 });
+
 function MainApp() {
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated)
   return (
@@ -30,8 +32,9 @@ function MainApp() {
       {isAuthenticated ? <MenuBar/> : null}
       <Switch>
         <Route exact path="/login" component={SignIn}></Route>
+        <Route exact path="/register" component={SignUp}></Route>
         <Route exact path="/stories" render={() => (
-          isAuthenticated === false ? <MyStories/> : <Redirect to="/login"/>
+          isAuthenticated === true ? <MyStories/> : <Redirect to="/login"/>
         )}></Route>
       </Switch>
     </div>

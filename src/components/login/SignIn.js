@@ -14,6 +14,7 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import { useDispatch } from 'react-redux';
 import { startLogin } from '../../actions/authAction';
+import { useHistory } from 'react-router-dom';
 
 function Copyright() {
     return (
@@ -59,6 +60,10 @@ function SignIn() {
         e.preventDefault();
         console.log('Loging ...');
         dispatch(startLogin({ nickname, password }))
+    }
+    const history = useHistory();
+    function redirectRegister() {
+      history.push("/register")
     }
     return (
         <Container component="main" maxWidth="xs">
@@ -110,19 +115,19 @@ function SignIn() {
             >
               Sign In
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
           </form>
+          <Grid container>
+            <Grid item xs>
+              <Link href="#" variant="body2">
+                Forgot password?
+              </Link>
+            </Grid>
+            <Grid item>
+              <Link component="button" variant="body2" onClick={() => redirectRegister()}>
+                {"Don't have an account? Sign Up"}
+              </Link>
+            </Grid>
+          </Grid>
         </div>
         <Box mt={8}>
           <Copyright />
