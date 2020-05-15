@@ -9,7 +9,7 @@ const headers = {
 function* startLogin(payload) {
     console.log(payload);
     const { nickname, password } = payload;
-    const data = yield axios.post('http://localhost:4000/login', { nickname, password}, { headers })
+    const data = yield axios.post('http://localhost:5000/login', { nickname, password}, { headers })
                                 .then(response => response)
                                 .catch(error => console.log(error))
     console.log(data);
