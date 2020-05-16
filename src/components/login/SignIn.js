@@ -16,7 +16,8 @@ import { useDispatch } from 'react-redux';
 import { startLogin } from '../../actions/authAction';
 import { useHistory } from 'react-router-dom';
 import Copyright from '../commons/Copyright';
-
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator'
+import { useRef } from 'react';
 const useStyles = makeStyles((theme) => ({
     paper: {
       marginTop: theme.spacing(8),
@@ -52,6 +53,8 @@ function SignIn() {
     function redirectRegister() {
       history.push("/register")
     }
+    const formRef = useRef();
+    //this.refForm = React.createRef();
     return (
         <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -62,11 +65,10 @@ function SignIn() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <form className={classes.form} noValidate>
-            <TextField
+          <ValidatorForm ref={formRef} onSubmit={(e) => login(e)} onError={errors => console.log(errors)} className={classes.form}>
+            <TextValidator
               variant="outlined"
               margin="normal"
-              required
               fullWidth
               id="nickname"
               label="Username"
@@ -74,11 +76,12 @@ function SignIn() {
               autoFocus
               value={nickname}
               onChange={ e => saveNickname(e.target.value)}
+              validators={['required']}
+              errorMessages={['Nickname is required']}
             />
-            <TextField
+            <TextValidator
               variant="outlined"
               margin="normal"
-              required
               fullWidth
               name="password"
               label="Password"
@@ -87,6 +90,8 @@ function SignIn() {
               autoComplete="current-password"
               value={password}
               onChange={ e => savePassword(e.target.value)}
+              validators={['required']}
+              errorMessages={['Password is required']}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -98,11 +103,10 @@ function SignIn() {
               variant="contained"
               color="primary"
               className={classes.submit}
-              onClick={(e) => login(e)}
             >
               Sign In
             </Button>
-          </form>
+          </ValidatorForm>
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">
