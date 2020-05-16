@@ -92,12 +92,12 @@ export default function SignUp() {
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
                     <TextField
-                      name="fullName"
                       variant="outlined"
-                      required
+                      margin="normal"
                       fullWidth
-                      id="fullName"
+                      id="name"
                       label="Full Name"
+                      name="name"
                       autoFocus
                       value={values.name}
                       onChange={handleChange}
@@ -109,7 +109,6 @@ export default function SignUp() {
                   <Grid item xs={12}>
                     <TextField
                       variant="outlined"
-                      required
                       fullWidth
                       id="nickname"
                       label="Username"
@@ -125,7 +124,6 @@ export default function SignUp() {
                   <Grid item xs={12}>
                     <TextField
                       variant="outlined"
-                      required
                       fullWidth
                       id="email"
                       label="Email Address"
@@ -141,7 +139,6 @@ export default function SignUp() {
                   <Grid item xs={12}>
                     <TextField
                       variant="outlined"
-                      required
                       fullWidth
                       name="password"
                       label="Password"
@@ -162,7 +159,6 @@ export default function SignUp() {
                   variant="contained"
                   color="primary"
                   className={classes.submit}
-                  onClick={(e) => newUser(e)}
                 >
                   Sign Up
                 </Button>
