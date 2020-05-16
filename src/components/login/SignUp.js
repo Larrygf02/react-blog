@@ -15,6 +15,7 @@ import Container from '@material-ui/core/Container';
 import { useHistory } from 'react-router-dom';
 import Copyright from '../commons/Copyright';
 import { useDispatch } from 'react-redux';
+import { startNewUser } from '../../actions/authAction';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -53,7 +54,7 @@ export default function SignUp() {
   const newUser = (e) => {
     e.preventDefault();
     console.log('Creando nuevo usuario..');
-    console.log({ nickname, name, email, password });
+    dispatch(startNewUser({ nickname, name, email, password }));
   }
   return (
     <Container component="main" maxWidth="xs">
