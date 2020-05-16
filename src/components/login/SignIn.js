@@ -56,7 +56,7 @@ function SignIn() {
     }
     //Schema to validate
     const SignInSchema = Yup.object().shape({
-      nickname: Yup.string().required('Email is Required'),
+      nickname: Yup.string().required('Username is Required'),
       password: Yup.string().required('Password is required')
     })
 
@@ -100,7 +100,11 @@ function SignIn() {
                     value={values.nickname}
                     onChange={handleChange}
                     onBlur={handleBlur}
-
+                    className={
+                      errors.nickname && touched.nickname
+                        ? "text-input error"
+                        : "text-input"
+                    }
                   />
                   {errors.nickname && touched.nickname && (
                       <div className="input-feedback">{errors.nickname}</div>
@@ -117,9 +121,14 @@ function SignIn() {
                     value={values.password}
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    className={
+                      errors.password && touched.password
+                        ? "text-input error"
+                        : "text-input"
+                    }
                   />
                   {errors.password && touched.password && (
-                      <div className="input-feedback">{errors.nickname}</div>
+                      <div className="input-feedback">{errors.password}</div>
                   )}
                   <FormControlLabel
                     control={<Checkbox value="remember" color="primary" />}
