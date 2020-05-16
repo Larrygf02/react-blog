@@ -14,6 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { useHistory } from 'react-router-dom';
 import Copyright from '../commons/Copyright';
+import { useDispatch } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -37,15 +38,22 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
   const classes = useStyles();
-  const history = useHistory();
+  const dispatch = useDispatch();
   //state
   const [ nickname, saveNickname ] = useState('')
   const [ name, saveName ] = useState('')
   const [ email, saveEmail ] = useState('')
   const [ password, savePassword ] = useState('')
 
+  const history = useHistory();
   function redirectLogin() {
     history.push("/login")
+  }
+
+  const newUser = (e) => {
+    e.preventDefault();
+    console.log('Creando nuevo usuario..');
+    console.log({ nickname, name, email, password });
   }
   return (
     <Container component="main" maxWidth="xs">
@@ -61,7 +69,6 @@ export default function SignUp() {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                autoComplete="fname"
                 name="fullName"
                 variant="outlined"
                 required
@@ -70,7 +77,7 @@ export default function SignUp() {
                 label="Full Name"
                 autoFocus
                 value={name}
-                onClick={ e => saveName(e.target.value)}
+                onChange={ e => saveName(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -83,7 +90,7 @@ export default function SignUp() {
                 name="nickname"
                 autoComplete="lname"
                 value={nickname}
-                onClick={ e => saveNickname(e.target.value)}
+                onChange={ e => saveNickname(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -96,7 +103,7 @@ export default function SignUp() {
                 name="email"
                 autoComplete="email"
                 value={email}
-                onClick={ e => saveEmail(e.target.value)}
+                onChange={ e => saveEmail(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -110,7 +117,7 @@ export default function SignUp() {
                 id="password"
                 autoComplete="current-password"
                 value={password}
-                onClick={ e => savePassword(e.target.value)}
+                onChange={ e => savePassword(e.target.value)}
               />
             </Grid>
           </Grid>
@@ -120,6 +127,7 @@ export default function SignUp() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={(e) => newUser(e)}
           >
             Sign Up
           </Button>
