@@ -16,8 +16,9 @@ import { useDispatch } from 'react-redux';
 import { startLogin } from '../../actions/authAction';
 import { useHistory } from 'react-router-dom';
 import Copyright from '../commons/Copyright';
-import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator'
-import { useRef } from 'react';
+// Formik
+import { Formik } from 'formik';
+import * as Yup from 'yup';
 const useStyles = makeStyles((theme) => ({
     paper: {
       marginTop: theme.spacing(8),
@@ -42,19 +43,23 @@ function SignIn() {
     const classes = useStyles();
     const dispatch = useDispatch();
     //state
-    const [ nickname, saveNickname ] = useState('')
-    const [ password, savePassword ] = useState('');
+    //const [ nickname, saveNickname ] = useState('')
+    //const [ password, savePassword ] = useState('');
     const login = (e) => {
         e.preventDefault();
         console.log('Loging ...');
-        dispatch(startLogin({ nickname, password }))
+        //dispatch(startLogin({ nickname, password }))
     }
     const history = useHistory();
     function redirectRegister() {
       history.push("/register")
     }
-    const formRef = useRef();
-    //this.refForm = React.createRef();
+    //Schema to validate
+    const SignInSchema = Yup.object().shape({
+      nickname: Yup.string().required('Email is Required'),
+      password: Yup.string().required('Password is required')
+    })
+
     return (
         <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -65,48 +70,74 @@ function SignIn() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <ValidatorForm ref={formRef} onSubmit={(e) => login(e)} onError={errors => console.log(errors)} className={classes.form}>
-            <TextValidator
-              variant="outlined"
-              margin="normal"
-              fullWidth
-              id="nickname"
-              label="Username"
-              name="nickname"
-              autoFocus
-              value={nickname}
-              onChange={ e => saveNickname(e.target.value)}
-              validators={['required']}
-              errorMessages={['Nickname is required']}
-            />
-            <TextValidator
-              variant="outlined"
-              margin="normal"
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              value={password}
-              onChange={ e => savePassword(e.target.value)}
-              validators={['required']}
-              errorMessages={['Password is required']}
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-            >
-              Sign In
-            </Button>
-          </ValidatorForm>
+          <Formik 
+            initialValues={{nickname: '', password: ''}}
+            onSubmit={e => login(e)}
+            validationSchema={SignInSchema}
+          >
+            {props => {
+              const {
+                values,
+                touched,
+                errors,
+                dirty,
+                isSubmitting,
+                handleChange,
+                handleBlur,
+                handleSubmit,
+                handleReset
+              } = props;
+              return (
+                <form onSubmit={handleSubmit} className={classes.form}>
+                  <TextField
+                    variant="outlined"
+                    margin="normal"
+                    fullWidth
+                    id="nickname"
+                    label="Username"
+                    name="nickname"
+                    autoFocus
+                    value={values.nickname}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+
+                  />
+                  {errors.nickname && touched.nickname && (
+                      <div className="input-feedback">{errors.nickname}</div>
+                  )}
+                  <TextField
+                    variant="outlined"
+                    margin="normal"
+                    fullWidth
+                    name="password"
+                    label="Password"
+                    type="password"
+                    id="password"
+                    autoComplete="current-password"
+                    value={values.password}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                  {errors.password && touched.password && (
+                      <div className="input-feedback">{errors.nickname}</div>
+                  )}
+                  <FormControlLabel
+                    control={<Checkbox value="remember" color="primary" />}
+                    label="Remember me"
+                  />
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className={classes.submit}
+                  >
+                    Sign In
+                  </Button>
+                </form>
+              )
+            }}
+          </Formik>
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">
