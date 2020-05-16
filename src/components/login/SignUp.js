@@ -14,6 +14,9 @@ import { useHistory } from 'react-router-dom';
 import Copyright from '../commons/Copyright';
 import { useDispatch } from 'react-redux';
 import { startNewUser } from '../../actions/authAction';
+// Formik
+import { Formik } from 'formik';
+import * as Yup from 'yup';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -39,20 +42,26 @@ export default function SignUp() {
   const classes = useStyles();
   const dispatch = useDispatch();
   //state
-  const [ nickname, saveNickname ] = useState('')
+  /* const [ nickname, saveNickname ] = useState('')
   const [ name, saveName ] = useState('')
   const [ email, saveEmail ] = useState('')
-  const [ password, savePassword ] = useState('')
+  const [ password, savePassword ] = useState('') */
 
   const history = useHistory();
   function redirectLogin() {
     history.push("/login")
   }
-
+  //Schema to validate
+  const SignUpSchema = Yup.object().shape({
+    nickname: Yup.string().required('Username is Required'),
+    name: Yup.string().required('Full Name is required'),
+    email: Yup.string().email('Email is not valid').required('Email is required'),
+    password: Yup.string().required('Password is required')
+  })
   const newUser = (e) => {
     e.preventDefault();
     console.log('Creando nuevo usuario..');
-    dispatch(startNewUser({ nickname, name, email, password }));
+    //dispatch(startNewUser({ nickname, name, email, password }));
   }
   return (
     <Container component="main" maxWidth="xs">
