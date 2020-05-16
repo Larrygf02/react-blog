@@ -73,80 +73,110 @@ export default function SignUp() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form className={classes.form} noValidate>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                name="fullName"
-                variant="outlined"
-                required
-                fullWidth
-                id="fullName"
-                label="Full Name"
-                autoFocus
-                value={name}
-                onChange={ e => saveName(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="nickname"
-                label="Username"
-                name="nickname"
-                autoComplete="lname"
-                value={nickname}
-                onChange={ e => saveNickname(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                value={email}
-                onChange={ e => saveEmail(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                value={password}
-                onChange={ e => savePassword(e.target.value)}
-              />
-            </Grid>
-          </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            onClick={(e) => newUser(e)}
-          >
-            Sign Up
-          </Button>
-          <Grid container justify="flex-end">
-            <Grid item>
-              <Link component="button" variant="body2" onClick={() => redirectLogin()}>
-                Already have an account? Sign in
-              </Link>
-            </Grid>
-          </Grid>
-        </form>
+        <Formik 
+        initialValues={{nickname: '', name: '', email: '', password: ''}}
+        onSubmit={values => newUser(values)}
+        validationSchema={SignUpSchema}
+        >
+          {props => {
+            const {
+              values,
+              touched,
+              errors,
+              handleChange,
+              handleBlur,
+              handleSubmit
+            } = props;
+            return (
+              <form onSubmit={handleSubmit} className={classes.form}>
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <TextField
+                      name="fullName"
+                      variant="outlined"
+                      required
+                      fullWidth
+                      id="fullName"
+                      label="Full Name"
+                      autoFocus
+                      value={values.name}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      error={errors.name && touched.name}
+                      helperText={(errors.name && touched.name) && errors.name}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      variant="outlined"
+                      required
+                      fullWidth
+                      id="nickname"
+                      label="Username"
+                      name="nickname"
+                      autoComplete="lname"
+                      value={values.nickname}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      error={errors.nickname && touched.nickname}
+                      helperText={(errors.nickname && touched.nickname) && errors.nickname}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      variant="outlined"
+                      required
+                      fullWidth
+                      id="email"
+                      label="Email Address"
+                      name="email"
+                      autoComplete="email"
+                      value={values.email}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      error={errors.email && touched.email}
+                      helperText={(errors.email && touched.email) && errors.email}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      variant="outlined"
+                      required
+                      fullWidth
+                      name="password"
+                      label="Password"
+                      type="password"
+                      id="password"
+                      autoComplete="current-password"
+                      value={values.password}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      error={errors.password && touched.password}
+                      helperText={(errors.password && touched.password) && errors.password}
+                    />
+                  </Grid>
+                </Grid>
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}
+                  onClick={(e) => newUser(e)}
+                >
+                  Sign Up
+                </Button>
+                <Grid container justify="flex-end">
+                  <Grid item>
+                    <Link component="button" variant="body2" onClick={() => redirectLogin()}>
+                      Already have an account? Sign in
+                    </Link>
+                  </Grid>
+                </Grid>
+              </form>
+            )
+          }}
+        </Formik>
       </div>
       <Box mt={5}>
         <Copyright />
