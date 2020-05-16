@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -42,12 +42,9 @@ const useStyles = makeStyles((theme) => ({
 function SignIn() {
     const classes = useStyles();
     const dispatch = useDispatch();
-    //state
-    //const [ nickname, saveNickname ] = useState('')
-    //const [ password, savePassword ] = useState('');
-    const login = (e) => {
-        e.preventDefault();
-        console.log('Loging ...');
+    const login = (values) => {
+        const { nickname, password } = values;
+        dispatch(startLogin({nickname, password}))
         //dispatch(startLogin({ nickname, password }))
     }
     const history = useHistory();
@@ -59,7 +56,6 @@ function SignIn() {
       nickname: Yup.string().required('Username is Required'),
       password: Yup.string().required('Password is required')
     })
-
     return (
         <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -72,7 +68,7 @@ function SignIn() {
           </Typography>
           <Formik 
             initialValues={{nickname: '', password: ''}}
-            onSubmit={e => login(e)}
+            onSubmit={values => login(values)}
             validationSchema={SignInSchema}
           >
             {props => {
@@ -80,12 +76,9 @@ function SignIn() {
                 values,
                 touched,
                 errors,
-                dirty,
-                isSubmitting,
                 handleChange,
                 handleBlur,
-                handleSubmit,
-                handleReset
+                handleSubmit
               } = props;
               return (
                 <form onSubmit={handleSubmit} className={classes.form}>
@@ -128,7 +121,6 @@ function SignIn() {
                     variant="contained"
                     color="primary"
                     className={classes.submit}
-                    disabled={!dirty || isSubmitting}
                   >
                     Sign In
                   </Button>
