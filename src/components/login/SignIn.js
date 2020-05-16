@@ -100,15 +100,9 @@ function SignIn() {
                     value={values.nickname}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className={
-                      errors.nickname && touched.nickname
-                        ? "text-input error"
-                        : "text-input"
-                    }
+                    error={errors.nickname && touched.nickname}
+                    helperText={(errors.nickname && touched.nickname) && errors.nickname}
                   />
-                  {errors.nickname && touched.nickname && (
-                      <div className="input-feedback">{errors.nickname}</div>
-                  )}
                   <TextField
                     variant="outlined"
                     margin="normal"
@@ -121,15 +115,9 @@ function SignIn() {
                     value={values.password}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className={
-                      errors.password && touched.password
-                        ? "text-input error"
-                        : "text-input"
-                    }
+                    error={errors.password && touched.password}
+                    helperText={(errors.password && touched.password) && errors.password}
                   />
-                  {errors.password && touched.password && (
-                      <div className="input-feedback">{errors.password}</div>
-                  )}
                   <FormControlLabel
                     control={<Checkbox value="remember" color="primary" />}
                     label="Remember me"
@@ -140,6 +128,7 @@ function SignIn() {
                     variant="contained"
                     color="primary"
                     className={classes.submit}
+                    disabled={!dirty || isSubmitting}
                   >
                     Sign In
                   </Button>
