@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,19 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { useHistory } from 'react-router-dom';
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+import Copyright from '../commons/Copyright';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -50,6 +38,12 @@ const useStyles = makeStyles((theme) => ({
 export default function SignUp() {
   const classes = useStyles();
   const history = useHistory();
+  //state
+  const [ nickname, saveNickname ] = useState('')
+  const [ name, saveName ] = useState('')
+  const [ email, saveEmail ] = useState('')
+  const [ password, savePassword ] = useState('')
+
   function redirectLogin() {
     history.push("/login")
   }
@@ -65,27 +59,31 @@ export default function SignUp() {
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
               <TextField
                 autoComplete="fname"
-                name="firstName"
+                name="fullName"
                 variant="outlined"
                 required
                 fullWidth
-                id="firstName"
-                label="First Name"
+                id="fullName"
+                label="Full Name"
                 autoFocus
+                value={name}
+                onClick={ e => saveName(e.target.value)}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
               <TextField
                 variant="outlined"
                 required
                 fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
+                id="nickname"
+                label="Username"
+                name="nickname"
                 autoComplete="lname"
+                value={nickname}
+                onClick={ e => saveNickname(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -97,6 +95,8 @@ export default function SignUp() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                value={email}
+                onClick={ e => saveEmail(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -109,12 +109,8 @@ export default function SignUp() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
+                value={password}
+                onClick={ e => savePassword(e.target.value)}
               />
             </Grid>
           </Grid>
