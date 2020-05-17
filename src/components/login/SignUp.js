@@ -69,8 +69,12 @@ export default function SignUp() {
   })
   const newUser = (values) => {
     console.log('Creando nuevo usuario..');
-    const { nickname, name, email, password } = values;
-    dispatch(startNewUser({ nickname, name, email, password }));
+    //const { nickname, name, email, password } = values;
+    const action = {
+      payload: values,
+      history
+    }
+    dispatch(startNewUser(action));
   }
   return (
     <Container component="main" maxWidth="xs">
