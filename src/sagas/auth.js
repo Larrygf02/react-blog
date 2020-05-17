@@ -23,13 +23,11 @@ function* startLogin(payload) {
 
 function* newUser(payload) {
     console.log(payload);
-    const data = yield axios.post('http://localhost:5000/user', payload)
-                            .then(response => response)
-                            .catch(error => console.log(error))
-    console.log(data);
+    //const { nickname } = payload;
     try {
+        yield axios.post('http://localhost:5000/user', payload)
         yield put({ type: SUCCESS_NEW_USER })
-    } catch (error) {
+    }catch (error) {
         yield put({ type: FAILED_NEW_USER })
     }
 }
