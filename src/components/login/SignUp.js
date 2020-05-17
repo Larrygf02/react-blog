@@ -53,7 +53,11 @@ export default function SignUp() {
   }
   //Schema to validate
   const SignUpSchema = Yup.object().shape({
-    nickname: Yup.string().required('Username is Required'),
+    nickname: Yup.string().required('Username is Required').test(
+      'is-peque',
+      '${path} is not peque',
+      value => value === 'peque'
+    ),
     name: Yup.string().required('Full Name is required'),
     email: Yup.string().email('Email is not valid').required('Email is required'),
     password: Yup.string().required('Password is required')
