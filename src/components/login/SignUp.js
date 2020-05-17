@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -57,7 +57,7 @@ export default function SignUp() {
     nickname: Yup.string().required('Username is Required').test(
       'is-valid',
       // eslint-disable-next-line no-template-curly-in-string
-      '${path} is not valid',
+      'Username ${value} is not available',
       async value => {
         const { data } = await axios.get(`http://localhost:5000/user/valid/${value}`)
         return data.is_valid;
@@ -67,10 +67,10 @@ export default function SignUp() {
     email: Yup.string().email('Email is not valid').required('Email is required'),
     password: Yup.string().required('Password is required')
   })
-  const newUser = (e) => {
-    e.preventDefault();
+  const newUser = (values) => {
     console.log('Creando nuevo usuario..');
-    //dispatch(startNewUser({ nickname, name, email, password }));
+    const { nickname, name, email, password } = values;
+    dispatch(startNewUser({ nickname, name, email, password }));
   }
   return (
     <Container component="main" maxWidth="xs">
