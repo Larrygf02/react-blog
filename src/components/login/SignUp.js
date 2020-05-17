@@ -17,6 +17,7 @@ import { startNewUser } from '../../actions/authAction';
 // Formik
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -54,9 +55,13 @@ export default function SignUp() {
   //Schema to validate
   const SignUpSchema = Yup.object().shape({
     nickname: Yup.string().required('Username is Required').test(
-      'is-peque',
-      '${path} is not peque',
-      value => value === 'peque'
+      'is-valid',
+      // eslint-disable-next-line no-template-curly-in-string
+      '${path} is not valid',
+      async value => {
+        const { data } = await axios.get(`http://localhost:5000/user/valid/${value}`)
+        return data.is_valid;
+      }
     ),
     name: Yup.string().required('Full Name is required'),
     email: Yup.string().email('Email is not valid').required('Email is required'),
