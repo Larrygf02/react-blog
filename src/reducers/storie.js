@@ -2,6 +2,7 @@ import { START_GET_STORIES, SUCCESS_GET_STORIES, START_GET_ALL_STORIES, SUCCESS_
 
 const initialState = {
     stories: [],
+    stories_to_you: [],
     error: null,
     loading: false
 }
@@ -28,7 +29,7 @@ export default function(state=initialState, action) {
             return {
                 ...state,
                 loading: false,
-                stories: action.payload
+                stories_to_you: action.payload
             }
         case FAILED_GET_ALL_STORIES:
             return {
