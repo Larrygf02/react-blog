@@ -17,8 +17,7 @@ function* getStories({ payload }) {
     }
 }
 
-
-function* getAllStories(action) {
+function* getAllStories() {
     console.log('Entro al saga')
     try {
         const stories = yield axios.get('http://localhost:5000/stories')
