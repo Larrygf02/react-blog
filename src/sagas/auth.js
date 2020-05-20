@@ -21,8 +21,6 @@ function* startLogin(payload) {
 }
 
 function* newUser(action) {
-    console.log(action.payload);
-    console.log(action)
     const { history, payload } = action
     //const { nickname } = payload;
     try {

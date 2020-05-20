@@ -6,6 +6,7 @@ import { Box } from '@material-ui/core';
 function PageStories() {
     const dispatch = useDispatch();
     useEffect(() => {
+        console.log('Entro al dispatch')
         dispatch(startGetAllStories())
     }, [dispatch])
     // acceder al state

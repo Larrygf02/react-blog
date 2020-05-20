@@ -1,9 +1,10 @@
-import { put, takeLatest, takeEvery } from 'redux-saga/effects'
+import { put, takeLatest } from 'redux-saga/effects'
 import { START_GET_STORIES, SUCCESS_GET_STORIES, START_GET_ALL_STORIES, SUCCESS_GET_ALL_STORIES, FAILED_GET_ALL_STORIES } from '../actions/storieAction'; 
 import axios from 'axios';
-import clientAxios from '../config/axios';
+//import clientAxios from '../config/axios';
 
 function* getStories({ payload }) {
+    console.log('Entro stories');
     try {
         const stories = yield axios.get('http://localhost:5000/storie/user/3')
             .then(response => response.data)
@@ -17,9 +18,10 @@ function* getStories({ payload }) {
 }
 
 
-function* getAllStories({ payload }) {
+function* getAllStories(action) {
+    console.log('Entro al saga')
     try {
-        const stories = yield clientAxios.get('/stories')
+        const stories = yield axios.get('http://localhost:5000/stories')
                                         .then(response => response.data)
                                         .catch(error => console.log(error))
         console.log(stories);
@@ -29,8 +31,7 @@ function* getAllStories({ payload }) {
     }
 }
 // watchers
-
 export default function* stories() {
-    yield takeLatest(START_GET_STORIES, getStories);
-    yield takeEvery(START_GET_ALL_STORIES, getAllStories);
+    yield takeLatest(START_GET_STORIES, getStories)
+    yield takeLatest(START_GET_ALL_STORIES, getAllStories)
 }
