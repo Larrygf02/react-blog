@@ -10,6 +10,7 @@ import { Provider, useSelector } from 'react-redux';
 import store from './store';
 import SignIn from './components/login/SignIn';
 import SignUp from './components/login/SignUp';
+import PageStories from './components/stories/PageStories';
 
 //import MenuBar from './components/MenuMaterial';
 const theme = createMuiTheme({
@@ -31,6 +32,7 @@ function MainApp() {
     <div>
       {isAuthenticated ? <MenuBar/> : null}
       <Switch>
+        <Route exact path="/" component={PageStories}></Route>
         <Route exact path="/login" component={SignIn}></Route>
         <Route exact path="/register" component={SignUp}></Route>
         <Route exact path="/stories" render={() => (

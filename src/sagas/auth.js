@@ -9,13 +9,13 @@ const headers = {
 function* startLogin(payload) {
     console.log(payload);
     const { nickname, password } = payload;
-    const data = yield axios.post('http://localhost:5000/login', { nickname, password}, { headers })
-                                .then(response => response)
+    const { is_login, user } = yield axios.post('http://localhost:5000/login', { nickname, password}, { headers })
+                                .then(response => response.data)
                                 .catch(error => console.log(error))
-    console.log(data);
-    try {
-        yield put({ type: SUCCESS_LOGIN })
-    } catch (error) {
+    if (is_login) {
+        localStorage.user = JSON.stringify(user);
+        yield put({ type: SUCCESS_LOGIN, payload: user })
+    }else {
         yield put({ type: FAILED_LOGIN })
     }
 }
