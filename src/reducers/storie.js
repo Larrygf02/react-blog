@@ -1,4 +1,4 @@
-import { START_GET_STORIES, SUCCESS_GET_STORIES } from "../actions/storieAction"
+import { START_GET_STORIES, SUCCESS_GET_STORIES, START_GET_ALL_STORIES, SUCCESS_GET_ALL_STORIES, FAILED_GET_ALL_STORIES } from "../actions/storieAction"
 
 const initialState = {
     stories: [],
@@ -18,6 +18,22 @@ export default function(state=initialState, action) {
                 ...state,
                 loading: false,
                 stories: action.payload
+            }
+        case START_GET_ALL_STORIES:
+            return {
+                ...state,
+                loading: true
+            }
+        case SUCCESS_GET_ALL_STORIES:
+            return {
+                ...state,
+                loading: false,
+                stories: action.payload
+            }
+        case FAILED_GET_ALL_STORIES:
+            return {
+                ...state,
+                error: true
             }
         default:
             return state
