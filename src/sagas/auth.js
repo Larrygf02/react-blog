@@ -6,7 +6,8 @@ const headers = {
 }
 //import clientAxios from "../config/axios";
 
-function* startLogin(payload) {
+function* startLogin(action) {
+    const { history, payload } = action;
     console.log(payload);
     const { nickname, password } = payload;
     const { is_login, user } = yield axios.post('http://localhost:5000/login', { nickname, password}, { headers })
@@ -15,6 +16,7 @@ function* startLogin(payload) {
     if (is_login) {
         localStorage.user = JSON.stringify(user);
         yield put({ type: SUCCESS_LOGIN, payload: user })
+        history.push("/")
     }else {
         yield put({ type: FAILED_LOGIN })
     }

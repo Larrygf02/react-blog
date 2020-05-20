@@ -42,12 +42,19 @@ const useStyles = makeStyles((theme) => ({
 function SignIn() {
     const classes = useStyles();
     const dispatch = useDispatch();
+    const history = useHistory();
     const login = (values) => {
         const { nickname, password } = values;
-        dispatch(startLogin({nickname, password}))
+        const action = {
+          payload: {
+            nickname,
+            password
+          },
+          history
+        }
+        dispatch(startLogin(action))
         //dispatch(startLogin({ nickname, password }))
     }
-    const history = useHistory();
     function redirectRegister() {
       history.push("/register")
     }
