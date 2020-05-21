@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { startGetAllStories } from '../../actions/storieAction';
-import { Box, Grid, Button } from '@material-ui/core';
+import { Box, Grid } from '@material-ui/core';
 import CardStorie from './CardStorie';
 
 function PageStories() {
