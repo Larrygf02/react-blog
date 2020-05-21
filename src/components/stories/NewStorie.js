@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { Box, Grid, TextField, Button, makeStyles } from '@material-ui/core';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
     button: {
@@ -8,17 +9,26 @@ const useStyles = makeStyles((theme) => ({
 }))
 function NewStorie() {
     const classes = useStyles();
+    // acceder al store
+    const user = useSelector(state => state.auth.user);
     // state
-    
     const [title, saveTitle ] = useState('')
     const [content, saveContent ] = useState('');
     const handleSubmit = e => {
         e.preventDefault();
+        console.log(user);
+        const { ID:userid } = user; 
         const storie = {
+            userid,
             title,
             content
         }
         console.log(storie);
+    }
+
+    const saveDraft = e => {
+        e.preventDefault();
+        console.log('Entrando a draft');
     }
     return (
         <Fragment>
@@ -57,7 +67,8 @@ function NewStorie() {
                     <Button
                         type="submit"
                         variant="contained"
-                        color="primary">
+                        color="primary"
+                        onClick={saveDraft}>
                         Guardar
                     </Button>
                     <Button
