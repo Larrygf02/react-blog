@@ -11,6 +11,7 @@ import store from './store';
 import SignIn from './components/login/SignIn';
 import SignUp from './components/login/SignUp';
 import PageStories from './components/stories/PageStories';
+import PageReading from './components/reading/PageReading';
 import NewStorie from './components/stories/NewStorie';
 
 //import MenuBar from './components/MenuMaterial';
@@ -41,6 +42,9 @@ function MainApp() {
         )}></Route>
         <Route exact path="/new-storie" render={() => (
           isAuthenticated === true ? <NewStorie/> : <Redirect to="/login"/>
+        )}></Route>
+        <Route exact path="/list/reading" render={() => (
+          isAuthenticated === true ? <PageReading/> : <Redirect to="/login"/>
         )}></Route>
       </Switch>
     </div>

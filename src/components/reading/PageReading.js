@@ -21,3 +21,5 @@ const MyReadingList = () => {
         </Fragment>
     )
 }
+
+export default MyReadingList;

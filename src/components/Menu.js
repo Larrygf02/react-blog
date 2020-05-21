@@ -134,7 +134,7 @@ export default function MenuBar() {
     >
       <MenuItem component={Link} to="/new-storie" onClick={handleMenuClose}>Nueva Historia</MenuItem>
       <MenuItem component={Link} to="/stories" onClick={handleMenuClose}>Historias</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Lista de lectura</MenuItem>
+      <MenuItem component={Link} to="/list/reading" onClick={handleMenuClose}>Lista de lectura</MenuItem>
       <MenuItem onClick={handleMenuClose}>Perfil</MenuItem>
       <MenuItem onClick={handleMenuClose}>Configuracion</MenuItem>
       <MenuItem onClick={handleMenuClose}>Cerrar Sesión</MenuItem>
