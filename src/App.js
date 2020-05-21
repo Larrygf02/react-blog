@@ -11,6 +11,7 @@ import store from './store';
 import SignIn from './components/login/SignIn';
 import SignUp from './components/login/SignUp';
 import PageStories from './components/stories/PageStories';
+import NewStorie from './components/stories/NewStorie';
 
 //import MenuBar from './components/MenuMaterial';
 const theme = createMuiTheme({
@@ -37,6 +38,9 @@ function MainApp() {
         <Route exact path="/register" component={SignUp}></Route>
         <Route exact path="/stories" render={() => (
           isAuthenticated === true ? <MyStories/> : <Redirect to="/login"/>
+        )}></Route>
+        <Route exact path="/new-storie" render={() => (
+          isAuthenticated === true ? <NewStorie/> : <Redirect to="/login"/>
         )}></Route>
       </Switch>
     </div>

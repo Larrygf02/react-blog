@@ -132,7 +132,7 @@ export default function MenuBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Nueva Historia</MenuItem>
+      <MenuItem component={Link} to="/new-storie" onClick={handleMenuClose}>Nueva Historia</MenuItem>
       <MenuItem component={Link} to="/stories" onClick={handleMenuClose}>Historias</MenuItem>
       <MenuItem onClick={handleMenuClose}>Lista de lectura</MenuItem>
       <MenuItem onClick={handleMenuClose}>Perfil</MenuItem>
