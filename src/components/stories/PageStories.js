@@ -1,8 +1,8 @@
 import React, { Fragment, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { startGetAllStories } from '../../actions/storieAction';
-import { Box } from '@material-ui/core';
-
+import { Box, Grid } from '@material-ui/core';
+import CardStorie from './CardStorie';
 function PageStories() {
     const dispatch = useDispatch();
     useEffect(() => {
@@ -14,9 +14,11 @@ function PageStories() {
     console.log(stories);
     return (
         <Fragment>
-            <Box pl={8} pr={8} pt={4}>
-                <h1>Bienvenido Usuario</h1>
-            </Box>
+            <Grid pl={8} pr={8} pt={4}>
+                {stories.map(storie => (
+                    <CardStorie storie={storie} key={storie.ID}></CardStorie>
+                ))}
+            </Grid>
         </Fragment>
     )
 }
