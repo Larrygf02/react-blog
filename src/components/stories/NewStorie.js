@@ -1,6 +1,8 @@
 import React, { Fragment, useState } from 'react';
 import { Box, Grid, TextField, Button, makeStyles } from '@material-ui/core';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { startNewStorie } from '../../actions/storieAction';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     button: {
@@ -9,6 +11,8 @@ const useStyles = makeStyles((theme) => ({
 }))
 function NewStorie() {
     const classes = useStyles();
+    const dispatch = useDispatch();
+    const history = useHistory();
     // acceder al store
     const user = useSelector(state => state.auth.user);
     // state
@@ -23,6 +27,11 @@ function NewStorie() {
             title,
             content
         }
+        const action = {
+            payload: storie,
+            history
+        }
+        dispatch(startNewStorie(action))
         console.log(storie);
     }
 
