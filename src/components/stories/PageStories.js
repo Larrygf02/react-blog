@@ -14,11 +14,13 @@ function PageStories() {
     console.log(stories);
     return (
         <Fragment>
-            <Grid pl={8} pr={8} pt={4}>
-                {stories.map(storie => (
-                    <CardStorie storie={storie} key={storie.ID}></CardStorie>
-                ))}
-            </Grid>
+            <Box pl={8} pr={8} pt={4}>
+                <Grid container spacing={4}>
+                    {stories.map(storie => (
+                        <CardStorie storie={storie} key={storie.ID}></CardStorie>
+                    ))}
+                </Grid>
+            </Box>
         </Fragment>
     )
 }
