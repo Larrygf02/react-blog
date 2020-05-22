@@ -25,7 +25,7 @@ function ArchivedStories() {
                 <div key={storie.ID}>
                     <h2>{storie.Title}</h2>
                     <p className={classes.grey}>{storie.Content}</p>
-                    <span className={classes.grey}>{classes.CreatedAt}</span>
+                    <span className={classes.grey}>{storie.CreatedAt}</span>
                     <Divider/>
                 </div>
             ))}
