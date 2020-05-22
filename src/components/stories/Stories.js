@@ -8,10 +8,12 @@ function Stories() {
     // Inicializar el dispatch
     const classes = useStylesGlobal();
     const dispatch = useDispatch();
-    // const [ stories, setStories] = useState([]);
+    // acceder al state
+    const user = useSelector(state => state.auth.user)
+    const { ID:userid } = user;
     useEffect(() => {
-        dispatch(startGetStories());
-    }, [dispatch])
+        dispatch(startGetStories({userid}));
+    }, [dispatch, userid])
     // acceder al state
     const loading = useSelector(state => state.stories.loading)
     const stories = useSelector(state => state.stories.stories)

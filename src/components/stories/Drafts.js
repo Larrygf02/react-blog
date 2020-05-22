@@ -7,9 +7,12 @@ import Divider from '@material-ui/core/Divider';
 function Drafts() {
     const classes = useStylesGlobal();
     const dispatch = useDispatch();
+    // acceder al state
+    const user = useSelector(state => state.auth.user)
+    const { ID:userid } = user;
     useEffect(() => {
-        dispatch(startGetDrafts())
-    }, [dispatch])
+        dispatch(startGetDrafts({userid}))
+    }, [dispatch, userid])
 
     // acceder al state
     const loading = useSelector(state => state.drafts.loading)
