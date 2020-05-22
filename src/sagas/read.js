@@ -16,7 +16,7 @@ function* getArchivedStories(payload) {
     const { userid } = payload;
     try {
         const { data } = yield axios.get(`http://localhost:5000/user/storie/archiveds/${userid}`)
-        yield put({ type: SUCCESS_GET_SAVED_STORIES, payload: data })
+        yield put({ type: SUCCESS_GET_ARCHIVED_STORIES, payload: data })
     } catch (error) {
         yield put({ type: FAILED_GET_ARCHIVED_STORIES })
     }
