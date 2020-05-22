@@ -5,9 +5,8 @@ import { START_GET_SAVED_STORIES, SUCCESS_GET_SAVED_STORIES, FAILED_GET_SAVED_ST
 function* getSavedStories(payload) {
     const { userid } = payload;
     try {
-        const savedHistories = yield axios.get(`http://localhost:5000/user/storie/favorites/${userid}`)
-        console.log(savedHistories);
-        yield put({ type: SUCCESS_GET_SAVED_STORIES })
+        const { data } = yield axios.get(`http://localhost:5000/user/storie/favorites/${userid}`)
+        yield put({ type: SUCCESS_GET_SAVED_STORIES, payload: data })
     } catch (error) {
         yield put({ type: FAILED_GET_SAVED_STORIES })
     }
