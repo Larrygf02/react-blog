@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { startGetAllStories } from '../../actions/storieAction';
 import { Box, Grid } from '@material-ui/core';
 import CardStorie from './CardStorie';
+import { useHistory } from 'react-router-dom';
 
 function PageStories() {
     const dispatch = useDispatch();
@@ -12,7 +13,7 @@ function PageStories() {
     }, [dispatch])
     // acceder al state
     const stories = useSelector(state => state.stories.stories_to_you)
-    console.log(stories);
+    const history = useHistory()
     return (
         <Fragment>
             <Box pl={8} pr={8} pt={4}>

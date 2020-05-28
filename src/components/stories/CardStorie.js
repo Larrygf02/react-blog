@@ -23,10 +23,12 @@ const useStyles = makeStyles({
 function CardStorie(props) {
   const classes = useStyles();
   const { storie } = props;
-
+  const redirectStorie = id => {
+    console.log(id)
+  }
   return (
     <Grid item xs={12} md={6}>
-      <CardActionArea component="a" href="#">
+      <CardActionArea component="button" onClick={() => redirectStorie(storie.ID)}>
         <Card className={classes.card}>
           <div className={classes.cardDetails}>
             <CardContent>
